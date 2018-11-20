@@ -6,8 +6,6 @@ This project is a test project to calculate Tax on Company passing by phpUnit te
 
 These instructions below will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-If you don't have docker on your machine, go to Docker.site
-
 
 ### Prerequisites
 

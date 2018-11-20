@@ -39,6 +39,19 @@ class CompanyTest extends TestCase
         ];
     }
 
+    public function dataExpectedException()
+    {
+        return [
+            [
+                'name1', 
+                '12345', 
+                'SAS', 
+                null,
+                0.33
+            ]
+        ];
+    }
+
     /**
      * @dataProvider companyProvider
      */
@@ -51,5 +64,14 @@ class CompanyTest extends TestCase
         $calculatedTax = $companyService->calculateTax($annualRevenueFigure);
 
         $this->assertEquals($calculatedTax, $tax);
+    }
+
+    /**
+     * @dataProvider dataExpectedException
+     * @expectedException \App\Exception\InvalidCompanyException
+     */
+    public function testIfComPanyNotFreelancerAndAddressEmpty($name, $siret, $type, $address, $taxAmount)
+    {
+        $company = new Company($siret, $name, $type, $address, $taxAmount);
     }
 }
