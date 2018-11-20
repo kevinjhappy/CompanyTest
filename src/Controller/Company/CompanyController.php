@@ -8,8 +8,6 @@ class CompanyController
 {
     public function launch()
     {
-        return new Response(
-            '<html><body>Test</body></html>'
-        );
+        return 'Test';
     }
 }

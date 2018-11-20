@@ -5,29 +5,25 @@ declare(strict_types=1);
 namespace App\Entity\Company;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Company\CompanyTypeInterface;
+use Ramsey\Uuid\Uuid;
+use App\Exception\InvalidCompanyException;
+use App\Entity\Address;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
  */
-class Company implements CompanyTypeInterface
+class Company
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
-    private $uuid;
+    private $id;
 
     /**
-     * @ORM\Column(type="integer", length=14)
+     * @ORM\Column(type="integer", length=14, unique=true)
      */
     private $siretNumber;
 
@@ -37,19 +33,9 @@ class Company implements CompanyTypeInterface
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=120, nullable=true)
+     * @Embedded(class = "Address")
      */
-    private $street;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $postCode;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $cityName;
+    private $address;
 
     /**
      * @ManyToOne(targetEntity="CompanyType", inversedBy="name")
@@ -63,29 +49,27 @@ class Company implements CompanyTypeInterface
      */
     private $taxAmount;
 
-    public function getSiretNumber(): int
-    {
-        return $this->siretNumber;
+    public function __construct(
+        int $siretNumber,
+        string $name,
+        string $type,
+        Address $address = null,
+        float $taxAmount
+    ) {
+        if (null === $address && $type !== 'FREELANCER'){
+            Throw new InvalidCompanyException("Company other than 'FREELANCER' must have an address");
+        }
+        $this->siretNumber = $siretNumber;
+        $this->name = $name;
+        $this->type = $type;
+        $this->address = $address;
+        $this->taxAmount = $taxAmount;
+        
     }
 
-    public function getName(): string
+    public function getTaxAmount(): float
     {
-        return $this->name;
-    }
-
-    public function getFullAddress(): ?string
-    {
-        return "{$this->street} {$this->postCode} {$this->cityName}";
-    }
-
-    public function getTypeName(): string
-    {
-        return $this->type;
-    }
-
-    public function calculateTax(float $revenueFigure): float
-    {
-        return $revenueFigure * $this->$taxAmount;
+        return $this->taxAmount;
     }
 
 }
