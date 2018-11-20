@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Entity\Company;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Company\CompanyTypeInterface;
