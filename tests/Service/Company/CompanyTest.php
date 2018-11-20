@@ -29,11 +29,11 @@ class CompanyTest extends TestCase
             ],
             [
                 'name2', 
-                '12345', 
+                '06789', 
                 'FREELANCER',
                 null,
                 0.25,
-                345000, 
+                345000,
                 86250
             ]
         ];
@@ -59,9 +59,9 @@ class CompanyTest extends TestCase
     {
         $company = new Company($siret, $name, $type, $address, $taxAmount);
 
-        $companyService = new CompanyService($company);
+        $companyService = new CompanyService();
 
-        $calculatedTax = $companyService->calculateTax($annualRevenueFigure);
+        $calculatedTax = $companyService->calculateTax($company, $annualRevenueFigure);
 
         $this->assertEquals($calculatedTax, $tax);
     }

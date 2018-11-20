@@ -10,15 +10,8 @@ use App\Service\Company\CompanyTaxInterface;
 class CompanyService implements CompanyTaxInterface
 {
 
-    private $companyEntity;
-
-    public function __construct(Company $company)
+    public function calculateTax(Company $company, float $revenueFigure): float
     {
-        $this->companyEntity = $company;
-    }
-
-    public function calculateTax(float $revenueFigure): float
-    {
-        return $revenueFigure * $this->companyEntity->getTaxAmount();
+        return $revenueFigure * $company->getTaxAmount();
     }
 }
