@@ -10,6 +10,28 @@ use App\Entity\Address;
 class CompanyTest extends TestCase
 {
 
+    /**
+     * @dataProvider companyProvider
+     */
+    public function testcalculateTax($name, $siret, $type, $address, $taxAmount, $annualRevenueFigure, $tax)
+    {
+        $company = new Company($siret, $name, $type, $address, $taxAmount);
+
+        $calculatedTax = (new CompanyService())->calculateTax($company, $annualRevenueFigure);
+
+        $this->assertEquals($calculatedTax, $tax);
+    }
+
+    /**
+     * @dataProvider dataExpectedException
+     * @expectedException \App\Exception\InvalidCompanyException
+     */
+    public function testIfComPanyNotFreelancerAndAddressEmpty($name, $siret, $type, $address, $taxAmount)
+    {
+        $company = new Company($siret, $name, $type, $address, $taxAmount);
+    }
+
+
     public function companyProvider()
     {
         return [
@@ -50,28 +72,5 @@ class CompanyTest extends TestCase
                 0.33
             ]
         ];
-    }
-
-    /**
-     * @dataProvider companyProvider
-     */
-    public function testcalculateTax($name, $siret, $type, $address, $taxAmount, $annualRevenueFigure, $tax)
-    {
-        $company = new Company($siret, $name, $type, $address, $taxAmount);
-
-        $companyService = new CompanyService();
-
-        $calculatedTax = $companyService->calculateTax($company, $annualRevenueFigure);
-
-        $this->assertEquals($calculatedTax, $tax);
-    }
-
-    /**
-     * @dataProvider dataExpectedException
-     * @expectedException \App\Exception\InvalidCompanyException
-     */
-    public function testIfComPanyNotFreelancerAndAddressEmpty($name, $siret, $type, $address, $taxAmount)
-    {
-        $company = new Company($siret, $name, $type, $address, $taxAmount);
     }
 }
