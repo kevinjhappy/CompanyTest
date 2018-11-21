@@ -9,14 +9,7 @@ These instructions below will get you a copy of the project up and running on yo
 
 ### Prerequisites
 
-To start this project, you will need Git and Docker installed on your machine
-
-```
-Git : https://git-scm.com/book/fr/v1/D%C3%A9marrage-rapide-Installation-de-Git
-(installation example on ubuntu)
-Sudo apt-get install git 
-
-```
+To start this project, you will need Docker installed on your machine
 
 ```
 Docker : https://docs.docker.com/install/linux/docker-ce/ubuntu/
@@ -40,10 +33,6 @@ sudo apt-get install docker-ce
 
 First copy the project into your working directory
 
-```
-git clone https://github.com/kevinjhappy/CompanyTest.git
-```
-
 Then with your terminal go to your working directory, enter the project directory and enter this command
 
 ```
@@ -66,7 +55,7 @@ Or by the container php-fpm build with the docker-compose command
 ### Break down into end to end tests
 
 Those tests are running a set of data that will create a Company Object and ask the annual tax the company will need to pay.
-In this tests series we have an example with a SAS Company Type and a FREELANCER Company Type
+In this tests series we have an example with a 'SAS' Company Type and a 'FREELANCER' Company Type
 
 ## Built With
 
