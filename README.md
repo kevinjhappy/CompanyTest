@@ -39,12 +39,6 @@ Then with your terminal go to your working directory, enter the project director
 docker-compose up
 ```
 
-You can now access the database at this url
-
-```
-http://localhost:8081
-```
-
 ## Running the tests
 
 You can run the tests in two ways :
