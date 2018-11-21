@@ -5,22 +5,23 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Annotations;
 
 /**
- * @Embeddable
+ * @ORM\Embeddable
  */
 class Address
 {
-    /** @Column(type = "string", length=120) */
+    /** @ORM\Column(type = "string", length=120) */
     private $street;
 
-    /** @Column(type = "string", length=10) */
+    /** @ORM\Column(type = "string", length=10) */
     private $postalCode;
 
-    /** @Column(type = "string", length=50) */
+    /** @ORM\Column(type = "string", length=50) */
     private $city;
 
-    /** @Column(type = "string", length=50) */
+    /** @ORM\Column(type = "string", length=50) */
     private $country;
 
     public function __construct(

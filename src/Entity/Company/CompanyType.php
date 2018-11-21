@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class CompanyType
 {
     /**
-     * @ORM/id
+     * @ORM\id
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
@@ -20,13 +20,13 @@ class CompanyType
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Company", mappedBy="type")
-     * @ORM/Column(type="string", length=10)
+     * @ORM\Column(type="string", length=10)
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Company", mappedBy="taxAmount")
-     * @ORM/Column(type="float")
+     * @ORM\Column(type="float")
      */
     private $taxAmount;
 }

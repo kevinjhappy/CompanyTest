@@ -33,19 +33,19 @@ class Company
     private $name;
 
     /**
-     * @Embedded(class = "Address")
+     * @ORM\Embedded(class = "App\Entity\Address")
      */
     private $address;
 
     /**
-     * @ManyToOne(targetEntity="CompanyType", inversedBy="name")
-     * @JoinColumn(name="type_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="CompanyType", inversedBy="name")
+     * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      */
     private $type;
 
     /**
-     * @ManyToOne(targetEntity="CompanyType", inversedBy="taxAmount")
-     * @JoinColumn(name="taxAmount_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="CompanyType", inversedBy="taxAmount")
+     * @ORM\JoinColumn(name="taxAmount_id", referencedColumnName="id")
      */
     private $taxAmount;
 
