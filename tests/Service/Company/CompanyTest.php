@@ -31,6 +31,15 @@ class CompanyTest extends TestCase
         $company = new Company($siret, $name, $type, $address, $taxAmount);
     }
 
+    /**
+     * @dataProvider dataExpectedError
+     * @expectedException \TypeError
+     */
+    public function testIfCompanyConstructorNotValid($name, $siret, $type, $address, $taxAmount)
+    {
+        $company = new Company($siret, $name, $type, $address, $taxAmount);
+    }
+
 
     public function companyProvider()
     {
@@ -69,6 +78,31 @@ class CompanyTest extends TestCase
                 '12345', 
                 'SAS', 
                 null,
+                0.33
+            ]
+        ];
+    }
+
+    public function dataExpectedError()
+    {
+        return [
+            [
+                null, 
+                '12345', 
+                'FREELANCER', 
+                null,
+                0.33
+            ],
+            [
+                null, 
+                '12345', 
+                'SAS', 
+                new Address(
+                    "fake street", 
+                    "12345", 
+                    "FAKE", 
+                    "country"
+                ),
                 0.33
             ]
         ];

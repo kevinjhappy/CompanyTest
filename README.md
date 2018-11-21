@@ -9,7 +9,7 @@ These instructions below will get you a copy of the project up and running on yo
 
 ### Prerequisites
 
-To start this project, you will need git and Docker installed on your machine
+To start this project, you will need Git and Docker installed on your machine
 
 ```
 Git : https://git-scm.com/book/fr/v1/D%C3%A9marrage-rapide-Installation-de-Git
@@ -61,7 +61,7 @@ http://localhost:8081
 You can run the tests in two ways :
 Locally by running ``` ./bin/phpunit ```
 Or by the container php-fpm build with the docker-compose command
-``` sudo docker exec -it <Name of the container> ./bin/phpunit ```
+``` sudo docker-compose exec php-fpm ./bin/phpunit ```
 
 ### Break down into end to end tests
 
